@@ -126,9 +126,20 @@ def combine_daily_insert(conn,cur,date,combine_insert):
         f.close()
         pass
 
+#获取前一天的日期
+def day_get(d):
+    oneday = datetime.timedelta(days=1)
+    day = d - oneday
+    #date_end=datetime.date(2016,8,27)
+    date_end=datetime.date(int(day.year),int(day.month),int(day.day))
+    return date_end
+
 if __name__ == '__main__':
     start_date = datetime.date(2016,7,17)###总表数据统计开始时�?
-    end_date = datetime.date(2016,7,19)###数据汇总插入时�?
+    # 获取当前时间
+    d = datetime.datetime.now()
+    end_date = day_get(d)  ##当前日期的前一�?
+    #end_date = datetime.date(2016,7,19)###数据汇总插入时�?
     date = end_date.strftime('%Y%m%d')###本次数据插入时间格式�?
     combine_date_str = datelist(start_date,end_date)#获得日期列表
     barrage = barrage_data_get(date)

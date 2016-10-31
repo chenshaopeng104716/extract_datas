@@ -120,8 +120,19 @@ def  update_new_user_birthday(conn,cur,date):
     except:
         print "updatge new_user birthday failure"
 
+#获取前一天的日期
+def day_get(d):
+    oneday = datetime.timedelta(days=1)
+    day = d - oneday
+    #date_end=datetime.date(2016,8,27)
+    date_end=datetime.date(int(day.year),int(day.month),int(day.day))
+    return date_end
+
 if __name__ == '__main__':
-    date = '20160718'
+    # 获取当前时间
+    d = datetime.datetime.now()
+    date = day_get(d)  ##当前日期的前一�?
+    #date = '20160718'
     uuid_data = uuid_get(date)###获取新增用户uuid
     length = len(uuid_data)
     if length > 0:
